@@ -43,6 +43,8 @@ body::before {
     display: flex;
     align-items: center;
     gap: 2rem;
+    margin-left: 80px; /* Adjusted margin to avoid overlap with side nav */
+    transition: margin-left 0.3s cubic-bezier(.4,2,.6,1);
 }
 
 .card img {
@@ -120,7 +122,7 @@ ul li a {
     box-shadow: 0 2px 8px rgba(108, 63, 214, 0.10);
     transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.1s;
     font-size: 1rem;
-    border: none;
+    border: 2px solid #000;
     outline: none;
 }
 
@@ -131,4 +133,95 @@ ul li a:focus {
     box-shadow: 0 4px 16px rgba(255, 228, 233, 0.18);
     text-decoration: none;
     transform: translateY(-2px) scale(1.04);
+}
+
+.side-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 60px;
+    background: rgba(93, 81, 228, 0.92);
+    box-shadow: 2px 0 12px rgba(76, 63, 214, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 3rem;
+    z-index: 10;
+    border: 2px solid #000;
+    transition: width 0.3s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
+    overflow-x: hidden;
+}
+
+.side-nav:hover,
+.side-nav:focus-within {
+    width: 180px;
+    box-shadow: 4px 0 24px rgba(76, 63, 214, 0.18);
+}
+
+.side-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.side-nav li {
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.side-nav a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.15rem;
+    font-weight: 700;
+    padding: 0.8em 1em;
+    border-radius: 1.5em;
+    text-align: center;
+    transition: background 0.2s, color 0.2s, opacity 0.3s, margin 0.3s;
+    opacity: 0;
+    margin-left: -40px;
+}
+
+.side-nav:hover a,
+.side-nav:focus-within a {
+    opacity: 1;
+    margin-left: 0;
+    transition-delay: 0.1s;
+}
+
+.side-nav a:hover,
+.side-nav a:focus {
+    background: #ffe4e9;
+    color: #6c3fd6;
+}
+
+/* Show only icons or initials when collapsed (optional, for now just hide text) */
+.side-nav:not(:hover):not(:focus-within) a {
+    pointer-events: none;
+}
+
+.card {
+    margin-left: 80px;
+    transition: margin-left 0.3s cubic-bezier(.4,2,.6,1);
+}
+
+.side-nav:hover ~ .card,
+.side-nav:focus-within ~ .card {
+    margin-left: 200px;
+}
+
+.side-nav::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 24px;
+    z-index: 20;
+    pointer-events: none;
 }
